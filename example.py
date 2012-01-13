@@ -22,5 +22,10 @@ page = requests.get('http://www.bellcountytx.com/Countycoor/CSTMR/DOCKET2C.HTM')
 
 docket = extract_docket_text(page)
 
-for result in list(iterparse_fromstring(docket, FIELDS))[:10]:
-    print result
+try:
+  from scraperwiki.sqlite import save    
+except:
+  def save(a=None,b=None,c=None):
+    print b
+for result in list(iterparse_fromstring(docket, FIELDS)):#[:10]:
+    save([],result)
